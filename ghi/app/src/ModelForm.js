@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { formContainerStyle,
-    formTitleStyle,
-    formGroupStyle,
-    labelStyle,
-    inputStyle,
-    selectStyle,
-    buttonStyle,
-    imagePreviewContainerStyle,
-imagePreviewStyle} from './ModelForm.styles';
+import { formContainerStyle, formTitleStyle, formGroupStyle, labelStyle, inputStyle, selectStyle, buttonStyle, imagePreviewContainerStyle, imagePreviewStyle } from './ModelForm.styles';
+
 function ModelForm() {
     const [modelName, setModelName] = useState('');
     const [pictureUrl, setPictureUrl] = useState('');
@@ -30,9 +23,9 @@ function ModelForm() {
             }
         };
 
-
         getManufacturersData();
     }, []);
+
     useEffect(() => {
         setImagePreview(pictureUrl);
     }, [pictureUrl]);
@@ -58,11 +51,10 @@ function ModelForm() {
             if (response.ok) {
                 const newModel = await response.json();
                 console.log(newModel);
-                // Reset form fields here
                 setModelName('');
                 setPictureUrl('');
                 setManufacturerId('');
-                setImagePreview(''); // Reset the image preview as well
+                setImagePreview('');
             } else {
                 console.error('HTTP error:', response.statusText);
             }
@@ -70,60 +62,61 @@ function ModelForm() {
             console.error('Network error:', error.message);
         }
     };
+
     return (
         <div style={formContainerStyle}>
-          <h1 style={formTitleStyle}>Create a Vehicle Model</h1>
-          <form onSubmit={handleSubmit} id="add-model-form">
-            <div style={formGroupStyle}>
-              <label htmlFor="modelName" style={labelStyle}>Model Name</label>
-              <input
-                type="text"
-                id="modelName"
-                value={modelName}
-                onChange={(e) => setModelName(e.target.value)}
-                style={inputStyle}
-                placeholder="Enter model name..."
-                required
-              />
-            </div>
-            <div style={formGroupStyle}>
-              <label htmlFor="pictureUrl" style={labelStyle}>Picture URL</label>
-              <input
-                type="url"
-                id="pictureUrl"
-                value={pictureUrl}
-                onChange={(e) => setPictureUrl(e.target.value)}
-                style={inputStyle}
-                placeholder="Enter picture URL..."
-                required
-              />
-            </div>
-            <div style={formGroupStyle}>
-              <label htmlFor="manufacturer" style={labelStyle}>Choose a Manufacturer</label>
-              <select
-                id="manufacturer"
-                value={manufacturerId}
-                onChange={(e) => setManufacturerId(e.target.value)}
-                style={selectStyle}
-                required
-              >
-                <option value="">Select a manufacturer</option>
-                {manufacturers.map((manufacturer) => (
-                  <option key={manufacturer.id} value={manufacturer.id}>
-                    {manufacturer.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <button style={buttonStyle} type="submit">Create</button>
-          </form>
-          {imagePreview && (
-      <div style={imagePreviewContainerStyle}>
-        <img src={imagePreview} alt="Preview" style={imagePreviewStyle} />
-      </div>
-    )}
-  </div>
-);
-    }
+            <h1 style={formTitleStyle}>Create a Vehicle Model</h1>
+            <form onSubmit={handleSubmit} id="add-model-form">
+                <div style={formGroupStyle}>
+                    <label htmlFor="modelName" style={labelStyle}>Model Name</label>
+                    <input
+                        type="text"
+                        id="modelName"
+                        value={modelName}
+                        onChange={(e) => setModelName(e.target.value)}
+                        style={inputStyle}
+                        placeholder="Enter model name..."
+                        required
+                    />
+                </div>
+                <div style={formGroupStyle}>
+                    <label htmlFor="pictureUrl" style={labelStyle}>Picture URL</label>
+                    <input
+                        type="url"
+                        id="pictureUrl"
+                        value={pictureUrl}
+                        onChange={(e) => setPictureUrl(e.target.value)}
+                        style={inputStyle}
+                        placeholder="Enter picture URL..."
+                        required
+                    />
+                </div>
+                <div style={formGroupStyle}>
+                    <label htmlFor="manufacturer" style={labelStyle}>Choose a Manufacturer</label>
+                    <select
+                        id="manufacturer"
+                        value={manufacturerId}
+                        onChange={(e) => setManufacturerId(e.target.value)}
+                        style={selectStyle}
+                        required
+                    >
+                        <option value="">Select a manufacturer</option>
+                        {manufacturers.map((manufacturer) => (
+                            <option key={manufacturer.id} value={manufacturer.id}>
+                                {manufacturer.name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <button style={buttonStyle} type="submit">Create</button>
+            </form>
+            {imagePreview && (
+                <div style={imagePreviewContainerStyle}>
+                    <img src={imagePreview} alt="Preview" style={imagePreviewStyle} />
+                </div>
+            )}
+        </div>
+    );
+}
 
-    export default ModelForm;
+export default ModelForm;

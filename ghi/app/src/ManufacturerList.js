@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  listContainerStyle,
-  rowStyle,
-  headerGradientStyle
-} from './List.styles';
+import { listContainerStyle, rowStyle, headerGradientStyle } from './List.styles';
 
 function ManufacturerList() {
   const [manufacturers, setManufacturers] = useState([]);

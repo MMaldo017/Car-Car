@@ -30,7 +30,7 @@ export const listContainerStyle = {
   };
 
   export const rowStyle = {
-    color: '#fff', // White text for rows
+    color: '#fff',
     backgroundColor: 'linear-gradient(to right, #dc3545, #000)',
     borderBottom: '3px solid #fff',
     borderRight: '3px solid #fff',
