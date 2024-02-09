@@ -1,4 +1,11 @@
 import {useEffect, useState} from 'react';
+import React from 'react';
+import {
+    listContainerStyle,
+    imageStyle,
+    rowStyle,
+    headerGradientStyle
+} from './List.styles';
 
 function ModelList(){
     const [models, setModels] = useState ([]);
@@ -16,35 +23,33 @@ function ModelList(){
       }, [])
 
       return (
-        <div>
-        <table className="table table-striped">
-            <thead>
-                <tr>
+        <div style={listContainerStyle}>
+          <table className="table" style={headerGradientStyle}>
+            <thead style={headerGradientStyle}>
+              <tr>
                 <th>Name</th>
                 <th>Manufacturer</th>
                 <th>Picture URL</th>
-                </tr>
+              </tr>
             </thead>
             <tbody>
-                {models.map(model => (
-                    <tr key={model.id}>
-                    <td>{model.name}</td>
-                    <td>{model.manufacturer.id}</td>
-                    <td>
-                        <img
-                        src={model.picture_url}
-                        alt={model.name}
-                        style={{width: '100px', height: 'auto'}}
-                        />
-                    </td>                    
+              {models.map((model, index) => (
+                <tr key={model.id} style={rowStyle}>
+                  <td>{model.name}</td>
+                  <td>{model.manufacturer.name}</td>
+                  <td>
+                    <img
+                      src={model.picture_url}
+                      alt={model.name}
+                      style={imageStyle}
+                    />
+                  </td>
                 </tr>
-            ))}
+              ))}
             </tbody>
-        </table>
-    </div>
-  );
-      
-}
+          </table>
+        </div>
+      );
+    }
 
-
-export default ModelList;
+    export default ModelList;

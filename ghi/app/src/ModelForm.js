@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
-
+import { formContainerStyle,
+    formTitleStyle,
+    formGroupStyle,
+    labelStyle,
+    inputStyle,
+    selectStyle,
+    buttonStyle,
+    imagePreviewContainerStyle,
+imagePreviewStyle} from './ModelForm.styles';
 function ModelForm() {
     const [modelName, setModelName] = useState('');
     const [pictureUrl, setPictureUrl] = useState('');
     const [manufacturerId, setManufacturerId] = useState('');
     const [manufacturers, setManufacturers] = useState([]);
+    const [imagePreview, setImagePreview] = useState('');
 
     useEffect(() => {
         const getManufacturersData = async () => {
@@ -21,8 +30,12 @@ function ModelForm() {
             }
         };
 
+
         getManufacturersData();
     }, []);
+    useEffect(() => {
+        setImagePreview(pictureUrl);
+    }, [pictureUrl]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -45,6 +58,11 @@ function ModelForm() {
             if (response.ok) {
                 const newModel = await response.json();
                 console.log(newModel);
+                // Reset form fields here
+                setModelName('');
+                setPictureUrl('');
+                setManufacturerId('');
+                setImagePreview(''); // Reset the image preview as well
             } else {
                 console.error('HTTP error:', response.statusText);
             }
@@ -52,62 +70,60 @@ function ModelForm() {
             console.error('Network error:', error.message);
         }
     };
-
     return (
-        <div className="container">
-            <div className="row">
-                <div className="offset-md-3 col-md-6">
-                    <div className="shadow p-4 mt-4">
-                        <h2>Create a vehicle model</h2>
-                        <form onSubmit={handleSubmit}>
-                            <div className="form-floating mb-3">
-                                <input
-                                    type="text"
-                                    id="modelName"
-                                    value={modelName}
-                                    onChange={(e) => setModelName(e.target.value)}
-                                    className="form-control"
-                                    placeholder="Model name..."
-                                    required
-                                />
-                                <label htmlFor="modelName">Model name</label>
-                            </div>
-                            <div className="form-floating mb-3">
-                                <input
-                                    type="url"
-                                    id="pictureUrl"
-                                    value={pictureUrl}
-                                    onChange={(e) => setPictureUrl(e.target.value)}
-                                    className="form-control"
-                                    placeholder="Picture URL..."
-                                    required
-                                />
-                                <label htmlFor="pictureUrl">Picture URL</label>
-                            </div>
-                            <div className="form-floating mb-3">
-                                <select
-                                    id="manufacturer"
-                                    value={manufacturerId}
-                                    onChange={(e) => setManufacturerId(e.target.value)}
-                                    className="form-select"
-                                    required
-                                >
-                                    <option value="">Select a manufacturer</option>
-                                    {manufacturers.map((manufacturer) => (
-                                        <option key={manufacturer.id} value={manufacturer.id}>
-                                            {manufacturer.name}
-                                        </option>
-                                    ))}
-                                </select>
-                                <label htmlFor="manufacturer">Choose a manufacturer</label>
-                            </div>
-                            <button type="submit" className="btn btn-primary">Create</button>
-                        </form>
-                    </div>
-                </div>
+        <div style={formContainerStyle}>
+          <h1 style={formTitleStyle}>Create a Vehicle Model</h1>
+          <form onSubmit={handleSubmit} id="add-model-form">
+            <div style={formGroupStyle}>
+              <label htmlFor="modelName" style={labelStyle}>Model Name</label>
+              <input
+                type="text"
+                id="modelName"
+                value={modelName}
+                onChange={(e) => setModelName(e.target.value)}
+                style={inputStyle}
+                placeholder="Enter model name..."
+                required
+              />
             </div>
-        </div>
-    );
-}
+            <div style={formGroupStyle}>
+              <label htmlFor="pictureUrl" style={labelStyle}>Picture URL</label>
+              <input
+                type="url"
+                id="pictureUrl"
+                value={pictureUrl}
+                onChange={(e) => setPictureUrl(e.target.value)}
+                style={inputStyle}
+                placeholder="Enter picture URL..."
+                required
+              />
+            </div>
+            <div style={formGroupStyle}>
+              <label htmlFor="manufacturer" style={labelStyle}>Choose a Manufacturer</label>
+              <select
+                id="manufacturer"
+                value={manufacturerId}
+                onChange={(e) => setManufacturerId(e.target.value)}
+                style={selectStyle}
+                required
+              >
+                <option value="">Select a manufacturer</option>
+                {manufacturers.map((manufacturer) => (
+                  <option key={manufacturer.id} value={manufacturer.id}>
+                    {manufacturer.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <button style={buttonStyle} type="submit">Create</button>
+          </form>
+          {imagePreview && (
+      <div style={imagePreviewContainerStyle}>
+        <img src={imagePreview} alt="Preview" style={imagePreviewStyle} />
+      </div>
+    )}
+  </div>
+);
+    }
 
-export default ModelForm;
+    export default ModelForm;
