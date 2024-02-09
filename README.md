@@ -6,7 +6,7 @@ Team:
 * Person 2 - Martin Maldonado Auto Sales
 
 ## Design
- Sales Desgin - ![alt text](image.png) The value objects are writtine in inventory api and the sales api
+ Sales Desgin -  ![alt text](Untitled-2024-02-09-0947-1.png)  The value objects are writtine in inventory api and the sales api
  under their respective models.
 
 ## Service microservice
