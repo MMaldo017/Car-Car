@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-    formContainerStyle,
-    formTitleStyle,
-    formGroupStyle,
-    inputStyle,
-    buttonStyle
-} from './ModelForm.styles';
+import { formContainerStyle, formTitleStyle, formGroupStyle, inputStyle, buttonStyle } from './ModelForm.styles';
 
 function ManufacturerForm() {
     const [name, setName] = useState('');
@@ -33,7 +27,7 @@ function ManufacturerForm() {
                 if (response.status === 409) {
                     setErrorMessage('Manufacturer has already been added.');
                 } else {
-                    setErrorMessage('Manufacturer has already been added.');
+                    setErrorMessage('An error occurred while creating the manufacturer.');
                 }
             }
         } catch (error) {

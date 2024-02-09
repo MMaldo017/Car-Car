@@ -10,7 +10,6 @@ function ServiceAppointmentsList() {
   }, []);
 
   const fetchAutomobilesAndAppointments = async () => {
-    // Fetch automobiles first
     let automobiles = [];
     try {
       const autoResponse = await fetch("http://localhost:8100/api/automobiles/");
@@ -24,14 +23,16 @@ function ServiceAppointmentsList() {
       console.error('Error fetching automobiles:', error);
     }
 
-    // Then fetch appointments
     try {
       const appResponse = await fetch("http://localhost:8080/api/appointments/");
       if (appResponse.ok) {
         const appData = await appResponse.json();
         const appointmentsData = markVIPAppointments(appData.appointments, automobiles);
+
+        const visibleAppointmentsData = appointmentsData.filter(app => app.status !== 'canceled' && app.status !== 'finished');
+
         setAppointments(appointmentsData);
-        setVisibleAppointments(new Set(appointmentsData.map(app => app.id)));
+        setVisibleAppointments(new Set(visibleAppointmentsData.map(app => app.id)));
       } else {
         throw new Error('Failed to fetch appointments');
       }
@@ -49,7 +50,7 @@ function ServiceAppointmentsList() {
   };
 
   const updateAppointmentStatus = async (id, newStatus) => {
-    const statusSlug = newStatus; // "cancel" or "finish"
+    const statusSlug = newStatus;
     const url = `http://localhost:8080/api/appointments/${id}/${statusSlug}/`;
 
     try {
@@ -68,11 +69,15 @@ function ServiceAppointmentsList() {
           return appointment;
         });
         setAppointments(updatedAppointments);
+
+        if (newStatus === 'cancel' || newStatus === 'finish') {
+          setVisibleAppointments(prevVisible => new Set([...prevVisible].filter(appId => appId !== id)));
+        }
       } else {
-        console.error('Failed to update the appointment status:', response.statusText);
+        throw new Error('Failed to update appointment status');
       }
     } catch (error) {
-      console.error('Network error:', error.message);
+      console.error('Error updating appointment status:', error);
     }
   };
 
