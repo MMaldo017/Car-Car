@@ -7,8 +7,14 @@ import ModelForm from './ModelForm';
 import ManufacturerList from './ManufacturerList';
 import CreateManufacturer from './ManufacturerForm';
 import AutomobileList from './AutomobileList';
-import CreateAutomobile from './AutomobileForm';
 import AutomobileForm from './AutomobileForm';
+import SalespersonForm from './SalesPerson';
+import SalespeopleList from './ListSalesPeople';
+import AddCustomerForm from './CustomerForm';
+import CustomersList from './CustomerList';
+import NewSaleForm from './NewSale';
+import SalesList from './SalesList';
+import SalespersonHistory from './SalesPersonHis';
 function App() {
   return (
     <BrowserRouter>
@@ -22,6 +28,13 @@ function App() {
           <Route path="/create/manufacturer" element={<CreateManufacturer />} />
           <Route path="/automobiles" element={<AutomobileList />} />
           <Route path="/create/automobile" element={<AutomobileForm />} />
+          <Route path="/salespeople/create" element={<SalespersonForm />} />
+          <Route path="/salespeople" element={<SalespeopleList />} />
+          <Route path="/customer/add" element={<AddCustomerForm />} />
+          <Route path="/customer" element={<CustomersList />} />
+          <Route path="/sales/new" element={<NewSaleForm />} />
+          <Route path="/sales" element={<SalesList />} />
+          <Route path="/salespeople/history" element={<SalespersonHistory/>} />
         </Routes>
       </div>
     </BrowserRouter>
