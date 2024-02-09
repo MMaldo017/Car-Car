@@ -8,7 +8,8 @@ import requests
 sys.path.append("")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "service_project.settings")
 django.setup()
-
+# from sales_rest.models import AutomobileVO
+# from sales_rest.models import AutomobileVO
 # Import models from service_rest, here. Ignore vs-code error hinting
 # from service_rest.models import Something
 
