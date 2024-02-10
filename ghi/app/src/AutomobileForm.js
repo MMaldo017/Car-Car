@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  formContainerStyle,
-  formTitleStyle,
-  formGroupStyle,
-  labelStyle,
-  inputStyle,
-  selectStyle,
-  buttonStyle
-} from './ModelForm.styles';
+import { formContainerStyle, formTitleStyle, formGroupStyle, labelStyle, inputStyle, selectStyle, buttonStyle } from './ModelForm.styles';
 
 function AutomobileForm() {
   const [color, setColor] = useState('');
