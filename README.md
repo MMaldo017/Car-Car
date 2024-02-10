@@ -16,19 +16,20 @@ Explain your models and integration with the inventory
 microservice, here.
 
 Step: 1 fork and clone repository
+Step:2 change into the app folder with cd ghi/app and run this command npm install
 
-Step:2 Add partner to gitlab as a Maintainer
+Step:3 Add partner to gitlab as a Maintainer
 
-Step:3 Create a front end for inventory views
+Step:4 Create a front end for inventory views
 
-Step:4 Create Models and Views that connect to the CRUD api endpoints for Technicians and Appointments
+Step:5 Create Models and Views that connect to the CRUD api endpoints for Technicians and Appointments
 
-Step: 5 Create Frontend using React to grab from the API endpoints and to be able to create for each respective category both in inventory and services.
+Step: 6 Create Frontend using React to grab from the API endpoints and to be able to create for each respective category both in inventory and services.
 
-Step: 6 Create a frontend using React to get a list of data within each specified webpage tha will return a list of items from the CRUD api endpoints.
+Step: 7 Create a frontend using React to get a list of data within each specified webpage tha will return a list of items from the CRUD api endpoints.
 
 Port: 3000:3000
-This runs a Reac application and maps container to port 3000 and is accessed through localhost:3000
+This runs a React application and maps container to port 3000 and is accessed through localhost:3000
 
 Port: 8100:8000
 This hosts an inventory API. This port is mapped to port 8100 making it accessible to 8100 through http://localhost:8100
